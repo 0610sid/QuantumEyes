@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-
 
 .container {
     position: relative;
@@ -10,7 +8,7 @@
     min-width: 100vw;
     overflow-y: auto;
     background: url('final.svg') no-repeat;
-    background-size: cover;
+    background-size: cover
 }
 
 .title {
@@ -20,8 +18,8 @@
     color: #a3b1eb;
     font-size: 6rem;
     margin-top: 16%;
-    margin-left: 35%;
-    font-family: 'Barlow Condensed' , sans-serif;
+    margin-left: 33%;
+    font-family: 'Barlow Condensed', sans-serif
 }
 
 .tagline {
@@ -30,76 +28,105 @@
     margin: 0;
     color: #a3b1eb;
     font-size: 1.5rem;
-    margin-left: 27%;
-    font-family: 'Montserrat', sans-serif;
+    margin-left: 26%;
+    font-family: Montserrat, sans-serif
 }
 
 .aboutus {
     position: relative;
     color: #a3b1eb;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 3rem;
     font-weight: 500;
-    margin-top: 20%;
+    margin-top: 18%;
     margin-bottom: 2%;
-    margin-left: 5%;
+    margin-left: 4%
 }
 
 .abouttxt {
     position: relative;
     color: #a3b1eb;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 1.5rem;
     font-weight: 300;
-    margin-left: 5%;
-    width: 30%;
+    margin-left: 4%;
+    width: 30%
 }
 
 .testedtxt {
     position: relative;
     color: #a3b1eb;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 3rem;
     font-weight: 500;
     margin-top: 10%;
-    margin-left: 5%;
+    margin-left: 4%
 }
 
-
-.steps{
+.steps {
     position: relative;
     color: #a3b1eb;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 1.5rem;
     font-weight: 300;
-    margin-left: 5.5%;
-    width: 30%;
+    margin-left: 4.5%;
+    width: 30%
 }
 
-.stepsdiv{
+.stepsdiv {
     width: 70%;
-    min-height: 60vh;
+    min-height: 63vh;
     margin-top: 5%;
-    margin-left: 5.5%;
-    margin-bottom: 5%;
+    margin-left: 4%;
+    margin-bottom: 3%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly
 }
 
-.stepimg{
-    background-color: aqua;
-    width: 90%;
-    min-height: 40vh;
-    margin-left: 3%;
+.stepimg {
+    height: 40vh;
+    overflow: hidden;
 }
 
-.steptxt{
+.img{
+    max-height: 65%;
+    max-width: 90%;
+    object-fit: contain;
+    transform: translate(+30% , +25%);
+}
+
+.img2{
+    max-height: 75%;
+    max-width: 90%;
+    object-fit: contain;
+    transform: translate(+30% , +17%);
+}
+
+.testnow{
     color: #a3b1eb;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
+    font-family: Montserrat, sans-serif;
+    font-size: 1.45rem;
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    margin-right: 3%;
+}
+
+.stepparent {
+    width: 85%
+}
+
+.steptxt {
+    color: #a3b1eb;
+    font-family: Montserrat, sans-serif;
+    font-size: 1.45rem;
     font-weight: 300;
     width: 90%;
     margin-left: 3%;
     margin-top: 5%;
+    text-align: center;
 }
 
+.link {
+    color: #a3b1eb
+}

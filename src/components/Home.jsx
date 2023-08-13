@@ -6,18 +6,23 @@ import navb from "../stylesheets/Navbar.module.css";
 import Typewriter from "typewriter-effect";
 import { useNavigate } from "react-router-dom";
 
+import uploadimg from "../assets/upload.png";
+import brain from "../assets/brain.png";
+import eyescanner from "../assets/eye-scanner.png";
+
 const Home = () => {
+  let navigate = useNavigate();
 
-    let navigate = useNavigate()
-
-    const func1 = (e) =>{
-        navigate('/image/upload')
-    }
+  const func1 = (e) => {
+    navigate("/image/upload");
+  };
 
   return (
     <>
       <nav className={navb.navbar}>
-        <button className={navb.buttonhome} onClick={func1}>Get Started</button>
+        <button className={navb.buttonhome} onClick={func1}>
+          Get Started
+        </button>
       </nav>
 
       <div className={styles.container}>
@@ -53,31 +58,50 @@ const Home = () => {
           <p className={styles.steps}>In 3 Simple Steps</p>
         </div>
 
-        <div className={styles.stepsdiv}>
-          <div>
-            <div className={styles.stepimg}></div>
-            <p className={styles.steptxt}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              porro perspiciatis error
-            </p>
-          </div>
+          <div className={styles.stepsdiv}>
+            <div className={styles.stepparent}>
+              <div className={styles.stepimg}>
+                <img
+                  src={eyescanner}
+                  alt="Eye Scanner"
+                  className={styles.img}
+                />
+              </div>
+              <p className={styles.steptxt}>
+                Click a picture of your eye under a{" "}
+                <a
+                  href="https://en.wikipedia.org/wiki/Fundus_(eye)"
+                  className={styles.link}
+                >
+                  Fundus
+                </a>{" "}
+                or using a 20D lens attachment which matches the image above.
+              </p>
+            </div>
 
-          <div>
-            <div className={styles.stepimg}></div>
-            <p className={styles.steptxt}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              porro perspiciatis error
-            </p>
-          </div>
+            <div className={styles.stepparent}>
+              <div className={styles.stepimg}>
+                <img
+                  src={uploadimg}
+                  alt="Upload Image"
+                  className={styles.img2}
+                />
+              </div>
+              <p className={styles.steptxt}>
+              Conveniently upload images by dragging or selecting them directly from your device.
+              </p>
+            </div>
 
-          <div>
-            <div className={styles.stepimg}></div>
-            <p className={styles.steptxt}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              porro perspiciatis error
-            </p>
+            <div className={styles.stepparent}>
+              <div className={styles.stepimg}>
+                <img src={brain} alt="Upload Image" className={styles.img2} />
+              </div>
+              <p className={styles.steptxt}>
+                Await AI Assessment:<br/> Attain Instant Results, Detailed Overview
+              </p>
+              <a href="/image/upload" className={styles.testnow}>Test Now</a>
+            </div>
           </div>
-        </div>
       </div>
     </>
   );

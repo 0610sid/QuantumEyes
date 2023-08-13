@@ -3,7 +3,7 @@ import Dropzone from "react-dropzone";
 import { ClipLoader } from "react-spinners";
 
 import styles from "../stylesheets/ImageUp.module.css";
-import imguploadsvg from "./imgupload.svg";
+import imguploadsvg from "../assets/imgupload.svg";
 
 const ImageUpload = () => {
   const [clickme, setclickme] = useState(true);
@@ -54,34 +54,12 @@ const ImageUpload = () => {
     }, 8000);
   };
 
-  //   useEffect(() => {
-  //     const filediv = document.getElementById("acceptdiv");
-  //     const errordiv = document.getElementById("errdiv");
-
-  //     const outerdiv = document.getElementById("outerdiv");
-  //     outerdiv.style.transition = "height 0.5s ease";
-
-  //     if (filename) {
-  //       filediv.classList.add(styles.active);
-  //       filediv.style.transition = "height 2s ease";
-  //       filediv.style.transition = "padding 2s ease";
-  //     } else {
-  //       filediv.classList.remove(styles.active);
-  //     }
-
-  //     if (error) {
-  //       console.log("hehy");
-  //       errordiv.style.transition = "height 0.7s ease";
-  //       errordiv.style.transition = "padding 0.7s ease";
-  //       errordiv.classList.add(styles.errorafter);
-
-  //       setTimeout(() => {
-  //         setError(null);
-  //       }, 4000);
-  //     } else {
-  //       errordiv.classList.remove(styles.errorafter);
-  //     }
-  //   }, [filename, error]);
+  const tryagain = () => {
+    setclickme(true)
+    setresult(false)
+    setfilename(null)
+    file.current = null
+  }
 
   return (
     <div className={styles.container}>
@@ -188,7 +166,7 @@ const ImageUpload = () => {
           </div>
 
             <div className={styles.btncontianer}>
-            <button className={styles.buttons} onClick={handlesubmit}>
+            <button className={styles.buttons} onClick={tryagain}>
                   Try with another image
                 </button>
             </div>
