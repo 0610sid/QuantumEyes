@@ -10,6 +10,8 @@ import uploadimg from "../assets/upload.png";
 import brain from "../assets/brain.png";
 import eyescanner from "../assets/eye-scanner.png";
 
+import ChatBot from "./ChatBot.jsx";
+
 const Home = () => {
   let navigate = useNavigate();
 
@@ -24,7 +26,7 @@ const Home = () => {
           Get Started
         </button>
       </nav>
-
+      <ChatBot/>
       <div className={styles.container}>
         <div className={styles.headings}>
           <p className={styles.title}>

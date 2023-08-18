@@ -5,6 +5,8 @@ import { ClipLoader } from "react-spinners";
 import styles from "../stylesheets/ImageUp.module.css";
 import imguploadsvg from "../assets/imgupload.svg";
 
+import ChatBot from "./ChatBot.jsx";
+
 const ImageUpload = () => {
   const [clickme, setclickme] = useState(true);
   const [loader, setloader] = useState(false);
@@ -173,6 +175,7 @@ const ImageUpload = () => {
           
         </div>
       )}
+      <ChatBot />
     </div>
   );
 };
