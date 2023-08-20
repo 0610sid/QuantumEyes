@@ -1,3 +1,5 @@
+from future import absolute_import
+
 import torch
 from PIL import Image
 from flask import Flask, request, jsonify
