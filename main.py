@@ -18,7 +18,7 @@ from qiskit.visualization import *
 from classes import Hybrid , ConvNet , HybridFunction , QuantumCircuit
 import __main__
 
-setattr(__main__, "Net", ConvNet)
+setattr(__main__, "ConvNet", ConvNet)
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
