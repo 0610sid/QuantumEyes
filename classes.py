@@ -15,7 +15,6 @@ import torch.nn as nn
 
 import qiskit
 from qiskit.visualization import *
-from classes import *
 
 QC_outputs = ['000', '001', '010', '011', '100', '101', '110', '111']
 
