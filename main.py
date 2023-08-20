@@ -19,6 +19,9 @@ from classes import Hybrid , ConvNet , HybridFunction , QuantumCircuit
 import __main__
 
 setattr(__main__, "ConvNet", ConvNet)
+setattr(__main__, "Hybrid", Hybrid)
+setattr(__main__, "HybridFunction", HybridFunction)
+setattr(__main__, "QuantumCircuit", QuantumCircuit)
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
