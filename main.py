@@ -24,6 +24,7 @@ else:
 
 QC_outputs = ['000', '001', '010', '011', '100', '101', '110', '111']
 
+model = ConvNet()
 model = torch.load('qcnnmodel_73perc.pt', map_location = torch.device('cpu'))
 
 
