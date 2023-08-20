@@ -16,6 +16,9 @@ import torch.nn as nn
 import qiskit
 from qiskit.visualization import *
 from classes import Hybrid , ConvNet , HybridFunction , QuantumCircuit
+import __main__
+
+setattr(__main__, "Net", ConvNet)
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
@@ -25,7 +28,7 @@ else:
 QC_outputs = ['000', '001', '010', '011', '100', '101', '110', '111']
 
 model = torch.load('qcnnmodel_73perc.pt', map_location = torch.device('cpu'))
-
+print(model)
 
 def transform_image(image):
     # Calculate the cropping box to make the image square
