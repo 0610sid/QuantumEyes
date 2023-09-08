@@ -81,22 +81,22 @@ const ImageUpload = () => {
 
     form.append('file', file.current);
 
-    await axios.post("http://127.0.0.1:5000/predict", form)
-      .then((res) => {
-        console.log(res.data);
-        setGrade73(res.data.class_id);
-      })
+    // await axios.post("http://127.0.0.1:5000/predict", form)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setGrade73(res.data.class_id);
+    //   })
 
-    await axios.post("http://127.0.0.1:8081/predict", form)
-      .then((res) => {
-        console.log(res.data);
-        setGrade57(res.data.class_id);
-      })
+    // await axios.post("http://127.0.0.1:8081/predict", form)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setGrade57(res.data.class_id);
+    //   })
 
     setTimeout(() => {
       setloader(false);
       setresult(true);
-    }, 8000);
+    }, 3000);
   };
 
   const tryagain = () => {

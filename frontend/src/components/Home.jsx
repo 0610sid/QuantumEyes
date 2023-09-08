@@ -48,10 +48,9 @@ const Home = () => {
           <p className={styles.aboutus}>About Us</p>
 
           <p className={styles.abouttxt}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-            porro perspiciatis error inventore ex, quibusdam ad est aut vel
-            ratione molestiae a, sed, laboriosam voluptate quisquam rerum
-            nostrum? Aliquid, corporis!
+          Our website utilizes quantum computing and deep learning to detect diabetic retinopathy from 
+          fundus images. Additionally, we offer essential precautions and guidance for a comprehensive
+          approach to managing this eye disorder.
           </p>
         </div>
 

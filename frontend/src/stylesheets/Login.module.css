@@ -1,27 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
 
 .outer{
     min-height: 100vh;
     min-width: 100vw;
-    background-color: black;
+    background: linear-gradient(to bottom, #000000 85%, #1d113a);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .container{
-    width: 23vw;
+    min-width: 23vw;
     min-height: 60vh;
     border-radius: 25px;
     background-color: #0f0820;
+    /* background: rgba(255, 255, 255, 0.05); */
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     color: #a3b1eb;
     font-family: 'Montserrat', sans-serif;
+    padding: 2% 1% 2% 1%;
 }
 
 .heading{
-    font-weight: 500;
-    font-size: 3rem;
+    font-weight: 400;
+    font-size: 2.5rem;
     text-align: center;
     padding-top: 5%;
 }
@@ -47,21 +53,45 @@
     position: absolute;
     width: 1.7vw;
     top: 32%;
-    left: 10%;
+    left: 11%;
 }
 
 .input{
     border: none;
-	border-bottom: 2px solid #ae98e1;
+	border-bottom: 1px solid #ae98e1;
 	background: none;
     padding: 1%;
     padding-left: 13%;
     transition: .2s;
     font-family:'Montserrat', sans-serif;
     color:#a3b1eb;
-    font-size: 1.1rem;
-    width: 68%;
+    font-size: 1rem;
+    width: 80%;
     margin-left: 10%;
+}
+
+.btndiv{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 6%;
+    padding-bottom: 3%;
+}
+
+.tagline{
+    text-align: center;
+    font-size: 0.9rem;
+    margin-bottom: 2%;
+    margin-top: -1%;
+}
+
+.link{
+    color: #a3b1eb;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.link:hover{
+    color: #6682f3;
 }
 
 .input:active,
@@ -79,7 +109,7 @@
 
 .buttons{
     background-color: #ae98e1;
-    padding: 2% 2.75%;
+    padding: 2% 7%;
     border-color: transparent;
     font-size: 1.2rem;
     font-weight: 500;
