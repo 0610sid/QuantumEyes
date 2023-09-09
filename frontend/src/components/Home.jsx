@@ -17,14 +17,21 @@ const Home = () => {
 
   const func1 = (e) => {
     navigate("/image/upload");
-  };
+  }
+
+  const func2 = (e) => {
+    navigate("/login")
+  }
 
   return (
     <>
       <nav className={navb.navbar}>
-        <button className={navb.buttonhome} onClick={func1}>
-          Get Started
-        </button>
+        {(localStorage.getItem("Token")) ?
+          <button className={navb.buttonhome} onClick={func1}>Dashboard</button>
+          :
+          <button className={navb.buttonhome} onClick={func2}>Get Started</button>
+        }
+        
       </nav>
       <ChatBot/>
       <div className={styles.container}>
@@ -100,7 +107,11 @@ const Home = () => {
               <p className={styles.steptxt}>
                 Await AI Assessment:<br/> Attain Instant Results, Detailed Overview
               </p>
-              <a href="/image/upload" className={styles.testnow}>Test Now</a>
+              {(localStorage.getItem("Token")) ?
+                <a href="/image/upload" className={styles.testnow}>Test Now</a>
+                :
+                <a href="/login" className={styles.testnow}>Test Now</a>
+              }
             </div>
           </div>
       </div>

@@ -7,6 +7,8 @@ import Error404 from './components/Error404'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 
+import PrivateRoutes from './utils/PrivateRoutes'
+
 function App() {
 
   return (
@@ -14,7 +16,11 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Home />} />
+          
+          <Route element={<PrivateRoutes/>}>
           <Route path='/image/upload' element={<ImageUpload/>}/>
+          </Route>
+
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/signup' element={<SignUp/>}></Route>
           <Route path="*" element={<Error404/>} />

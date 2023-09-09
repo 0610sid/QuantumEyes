@@ -41,8 +41,6 @@ const ImageUpload = () => {
         setGrade(high)
       }
     }
-
-    console.log(grade)
   }, [grade57, grade73])
 
   const handlefiles = async (param) => {
@@ -76,7 +74,6 @@ const ImageUpload = () => {
   const handlesubmit = async () => {
     setclickme(false);
     setloader(true);
-    console.log(file.current);
     const form = new FormData();
 
     form.append('file', file.current);

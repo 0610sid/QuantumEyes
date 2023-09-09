@@ -30,12 +30,22 @@ app.post('/signup', async (req, res) => {
     try {
         let hashpass = " ";
 
-        if (!req.body.password || !req.body.abhaid || !req.body.name) {
+        if (!req.body.password || !req.body.abhaid || !req.body.email) {
             throw new Error('All fields must be filled');
+        }
+
+        if(!validator.isEmail(req.body.email))
+        {
+            throw new Error('Enter valid email')
         }
 
         if (!validator.isStrongPassword(req.body.password, { minLength: 8, minUppercase: 0, minSymbols: 0 })) {
             throw new Error('Password not strong enough');
+        }
+
+        if(req.body.abhaid <= 10000000000000 || req.body.abhaid >= 99999999999999)
+        {
+            throw Error('Enter a valid Abha Id')
         }
 
         const query = 'SELECT * FROM USERS WHERE abha_id = $1';
@@ -50,7 +60,7 @@ app.post('/signup', async (req, res) => {
 
         const values = [hashpass, req.body.abhaid, req.body.name];
 
-        db.query('INSERT INTO USERS(name, abha_id, password) VALUES ($3, $2, $1)', values, (error, results) => {
+        db.query('INSERT INTO USERS(email, abha_id, password) VALUES ($3, $2, $1)', values, (error, results) => {
             if (error) {
                 return res.status(500).json({ error: `Error in insertion: ${error}` });
             }
@@ -69,6 +79,11 @@ app.post('/login' , async(req , res) =>{
         
         if (!req.body.abhaid || !req.body.password) {
             throw Error('All fields must be filled')
+        }
+
+        if(req.body.abhaid <= 10000000000000 || req.body.abhaid >= 99999999999999)
+        {
+            throw Error('Enter a valid Abha Id')
         }
 
         const values = [req.body.abhaid]
@@ -94,6 +109,15 @@ app.post('/login' , async(req , res) =>{
 
     } catch (error) {
         return res.status(400).json({error : error.message})
+    }
+})
+
+app.post('/myverify' , async(req,res) =>{
+    try {
+        var decoded = jwt.verify(req.body.token , process.env.SECRET)
+        return res.json({success : true})
+    } catch (error) {
+        return res.status(400).json({success : false})      
     }
 })
 

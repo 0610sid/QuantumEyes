@@ -9,7 +9,6 @@ const ChatBot = () => {
 
   const activate = () => {
     setshow(!show);
-    console.log("hey");
   };
 
   return (
