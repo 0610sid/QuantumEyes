@@ -112,15 +112,17 @@ app.post('/login' , async(req , res) =>{
     }
 })
 
-app.post('/myverify' , async(req,res) =>{
-    try {
-        var decoded = jwt.verify(req.body.token , process.env.SECRET)
-        return res.json({success : true})
-    } catch (error) {
-        return res.status(400).json({success : false})      
-    }
+const port = process.env.PORT || 5000
+
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`)
 })
 
-app.listen(3456, () => {
-    console.log("Listening on port 3456");
-})
+// app.post('/myverify' , async(req,res) =>{
+//     try {
+//         var decoded = jwt.verify(req.body.token , process.env.SECRET)
+//         return res.json({success : true})
+//     } catch (error) {
+//         return res.status(400).json({success : false})      
+//     }
+// })
