@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../stylesheets/Dashboard.module.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -13,12 +14,23 @@ const Dashboard = () => {
         navigate('/image/upload');
     }
 
-    const [images, setImages] = useState([]);
+    const [alldata, setAllData] = useState([]);
+    let once = true;
 
-    useEffect(async () => {
-        const response = await fetch("http://localhost:8000/api/image/", {")
-        setImages([["a", "b", "c"]])
-    })
+    useEffect(() => {
+        const getdata = async () => {
+            const id = localStorage.getItem("ID")
+            const response = await axios.post("http://localhost:5000/getdata", { abhaid: id })
+            setAllData(response.data.data)
+            console.log(alldata)
+        }
+        if (once) {
+            getdata();
+            once = false;
+        }
+    }, [once])
+
+    console.log(alldata)
 
     return (
         <>
@@ -32,26 +44,26 @@ const Dashboard = () => {
                             </button>
                         </div>
                         <div className={styles.box}>
-                            <div className={styles.content}>
-                                <span className={styles.title}>Image</span>
-                                { images }
-                                {/* <img
-                                    src="https://res.cloudinary.com/djb8pgo4n/image/upload/v1694371549/iyezib7zo6v6ew7il2rv.jpg"
-                                    alt=""
-                                /> */}
-                            </div>
-
-                            <div className={styles.content}>
-                                <span className={styles.title}>Grade</span>
-                                <span className={styles.text}>
-                                    No Diabetic Retinopathy
-                                </span>
-                            </div>
-
-                            <div className={styles.content}>
-                                <span className={styles.title}>Date</span>
-                                <span className={styles.text}>11/09/2023</span>
-                            </div>
+                            <table className={styles.dashtable}>
+                                <thead>
+                                    <tr>
+                                        <th>Images</th>
+                                        <th>Grade</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {alldata.map((data, index) => {
+                                        return (
+                                            <tr>
+                                                <td><img src={data.url} height='100%' className={styles.imgtable}/></td>
+                                                <td>{data.diag}</td>
+                                                <td>{data.date}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
                         </div>
                     </center>
                 </section>
