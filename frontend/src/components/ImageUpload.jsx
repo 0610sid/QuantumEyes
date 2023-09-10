@@ -143,7 +143,9 @@ const ImageUpload = () => {
 
             {filename && (
               <div className={styles.fileinfo} id="acceptdiv">
-                {filename}{" "}
+                <span>
+                    {filename}{" "}
+                </span>
                 <button className={styles.buttons} onClick={handlesubmit}>
                   Submit
                 </button>
@@ -159,7 +161,6 @@ const ImageUpload = () => {
             <ClipLoader
               loading={true}
               color={"#a3b1eb"}
-              size={18}
               speedMultiplier={0.7}
               className={styles.loader}
             />
