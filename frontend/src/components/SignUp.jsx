@@ -36,7 +36,7 @@ const Signup = () => {
 
         setloader(true)
 
-        const response = await fetch("http://13.235.23.48:5000/signup",
+        const response = await fetch("http://localhost:5000/signup",
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
