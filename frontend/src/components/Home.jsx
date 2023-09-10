@@ -16,7 +16,7 @@ const Home = () => {
   let navigate = useNavigate();
 
   const func1 = (e) => {
-    navigate("/image/upload");
+    navigate("/dashboard");
   }
 
   const func2 = (e) => {
