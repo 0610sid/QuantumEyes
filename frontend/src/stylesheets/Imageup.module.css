@@ -180,3 +180,23 @@
     transform: translateY(-5px);
     cursor: pointer;
 }
+
+
+@media (orientation:portrait){
+    .firstin{
+        width: 85%;
+    }
+    
+    .uploaddiv{
+        padding: 8% 6%;
+    }
+
+    .draginfo{
+        font-size: 3.5vw;
+    }
+
+    .dragtag{
+        font-size: 5vw;
+        padding-bottom: 0.5vh;
+    }
+}
