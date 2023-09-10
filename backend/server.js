@@ -132,7 +132,7 @@ app.post('/signup2', async (req, res) => {
         if (!req.body.password) {
             throw new Error('Kindly fill in the password');
         }
-        
+
         if (!validator.isStrongPassword(req.body.password, { minLength: 8, minUppercase: 0, minSymbols: 0 })) {
             throw new Error('Password not strong enough')
         }
@@ -228,6 +228,26 @@ app.post('/login', async (req, res) => {
     } catch (error) {
         return res.status(400).json({ error: error.message })
     }
+})
+
+app.post('/savehistory' , async(req , res) =>{
+
+    try {
+        
+        const values = [req.body.url , req.body.abhaid , req.body.date , req.body.diag]
+
+        db.query('INSERT INTO HISTORY(url, abha_id, date , diag) VALUES ($1, $2, $3, $4)', values, (error, results) => {
+            if (error) {
+                return res.status(500).json({ error: `Error in insertion: ${error}` });
+            }
+
+            return res.json({ success: true });
+        });
+
+    } catch (error) {
+        return res.status(400).json({ error: error.message })
+    }
+
 })
 
 const port = process.env.PORT || 5000

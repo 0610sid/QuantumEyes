@@ -8,15 +8,15 @@ import imguploadsvg from "../assets/imgupload.svg";
 
 import ChatBot from "./ChatBot.jsx";
 
-const toclass = [1, 2, 0, 3, 4]
-const gradesAll = ["Mild", "Moderate", "No", "Proliferate", "Severe"]
+const toclass = [1, 2, 0, 3, 4];
+const gradesAll = ["Mild", "Moderate", "No", "Proliferate", "Severe"];
 const description = [
   "This is the earliest stage of diabetic retinopathy, characterized by tiny swellings/bulges in the blood vessels of the retina. These areas of swelling are known as microaneurysms. These microaneurysms can cause small amounts of fluid to leak into the retina, triggering swelling of the macula - the back of the retina. Despite this, there are usually no clear symptoms indicating there is a problem.",
   "At this stage, the tiny blood vessels further swell up, blocking blood flow to the retina and preventing proper nourishment. This stage will only cause noticeable signs if there is a build-up of blood and other fluids in the macula, causing vision to become blurry.",
   "You have no signs of Diabetic Retinopathy. However, it is important to note that diabetes can cause changes in your vision before you notice any problems. It is important to have regular eye exams to monitor your eye health.",
   "At this advanced stage of the disease, new blood vessels continue to grow in the retina. These blood vessels, which are thin and weak and prone to bleeding, cause scar tissue to form inside the eye. This scar tissue can pull the retina away from the back of your eye, causing retinal detachment. A detached retina typically results in blurriness, reduced field of vision, and even permanent blindness.",
-  "During this stage, a larger section of blood vessels in the retina becomes blocked, causing a significant decrease in blood flow to this area. The lack of blood triggers a signal to the body to start growing new blood vessels in the retina. These new blood vessels are extremely thin and fragile and cause retinal swelling, resulting in noticeably blurry vision, dark spots and even patches of vision loss. If these vessels leak into the macula, sudden and permanent vision loss may occur. At this stage, there is a high chance of irreversible vision loss."
-]
+  "During this stage, a larger section of blood vessels in the retina becomes blocked, causing a significant decrease in blood flow to this area. The lack of blood triggers a signal to the body to start growing new blood vessels in the retina. These new blood vessels are extremely thin and fragile and cause retinal swelling, resulting in noticeably blurry vision, dark spots and even patches of vision loss. If these vessels leak into the macula, sudden and permanent vision loss may occur. At this stage, there is a high chance of irreversible vision loss.",
+];
 
 const ImageUpload = () => {
   const [clickme, setclickme] = useState(true);
@@ -34,14 +34,13 @@ const ImageUpload = () => {
   useEffect(() => {
     if (grade73 && grade57) {
       if (grade57 === grade73) {
-        setGrade(grade57)
-      }
-      else {
-        const high = grade57 > grade73 ? grade57 : grade73
-        setGrade(high)
+        setGrade(grade57);
+      } else {
+        const high = grade57 > grade73 ? grade57 : grade73;
+        setGrade(high);
       }
     }
-  }, [grade57, grade73])
+  }, [grade57, grade73]);
 
   const handlefiles = async (param) => {
     if (param[0]) {
@@ -74,9 +73,9 @@ const ImageUpload = () => {
   const handlesubmit = async () => {
     setclickme(false);
     setloader(true);
-    const form = new FormData();
+    // const form = new FormData();
 
-    form.append('file', file.current);
+    // form.append("file", file.current);
 
     // await axios.post("http://127.0.0.1:5000/predict", form)
     //   .then((res) => {
@@ -90,18 +89,51 @@ const ImageUpload = () => {
     //     setGrade57(res.data.class_id);
     //   })
 
-    setTimeout(() => {
-      setloader(false);
-      setresult(true);
-    }, 3000);
+    const cloud = new FormData();
+    cloud.append("file", file.current);
+    cloud.append("upload_preset", "quantumeyes");
+    cloud.append("cloud_name", "djb8pgo4n");
+
+    const curdate = new Date();
+    const fordate =
+      curdate.getDate() +
+      "/" +
+      (curdate.getMonth() + 1) +
+      "/" +
+      curdate.getFullYear();
+
+
+    const response1 = await fetch("https://api.cloudinary.com/v1_1/djb8pgo4n/image/upload", {
+      method: "POST",
+      body: cloud,
+    });
+
+    const data1 = await response1.json()
+
+    const response2 = await fetch("http://localhost:5000/savehistory", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        url: data1.url, abhaid: localStorage.getItem('ID'), date: fordate, diag: "GRADE1",
+      }),
+    })
+
+    const data2 = await response2.json()
+
+    if (data2.success) {
+      setloader(false)
+      setresult(true)
+    }
+
+
   };
 
   const tryagain = () => {
-    setclickme(true)
-    setresult(false)
-    setfilename(null)
-    file.current = null
-  }
+    setclickme(true);
+    setresult(false);
+    setfilename(null);
+    file.current = null;
+  };
 
   return (
     <div className={styles.container}>
@@ -143,9 +175,7 @@ const ImageUpload = () => {
 
             {filename && (
               <div className={styles.fileinfo} id="acceptdiv">
-                <span>
-                    {filename}{" "}
-                </span>
+                <span>{filename} </span>
                 <button className={styles.buttons} onClick={handlesubmit}>
                   Submit
                 </button>
@@ -165,9 +195,7 @@ const ImageUpload = () => {
               className={styles.loader}
             />
 
-            <p className={styles.loadtext}>
-              Hang Tight! While We Analyze Your Image
-            </p>
+            <p className={styles.loadtext}>Hang Tight! While We Analyze Your Image</p>
           </div>
         </div>
       )}
@@ -179,32 +207,43 @@ const ImageUpload = () => {
               <p className={styles.thirdhead}>Diagnosis</p>
 
               <div className={styles.thirdtext}>
-                According to our analysis, the Image you uploaded is of <b>Grade {toclass[grade]}</b> severity. This Falls under the category of <b>{gradesAll[grade]} Diabetic Retinopathy</b>.
+                According to our analysis, the Image you uploaded is of{" "}
+                <b>Grade {toclass[grade]}</b> severity. This Falls under the
+                category of <b>{gradesAll[grade]} Diabetic Retinopathy</b>.
               </div>
-              <img src={file.current && URL.createObjectURL(file.current)} alt="Uploaded" className={styles.uploadedimg} />
-
+              <img
+                src={file.current && URL.createObjectURL(file.current)}
+                alt="Uploaded"
+                className={styles.uploadedimg}
+              />
             </div>
 
             <div className={styles.thirdin}>
               <p className={styles.thirdhead}>Description</p>
 
-              <div className={styles.thirdtext}>
-                {description[grade]}
-              </div>
+              <div className={styles.thirdtext}>{description[grade]}</div>
             </div>
 
-            <div className={styles.thirdin}><p className={styles.thirdhead}>Symptoms</p>
+            <div className={styles.thirdin}>
+              <p className={styles.thirdhead}>Symptoms</p>
 
               <div className={styles.thirdtext}>
                 <p className={styles.symptomsdiv}>
-                  <b>1. </b>Spots or dark strings floating in your vision<br />
-                  <b>2. </b>Blurred vision<br />
-                  <b>3. </b>Fluctuating vision<br />
-                  <b>4. </b>Dark or empty areas in your vision<br />
-                  <b>5. </b>Vision loss<br />
-                  <b>6. </b>If you notice any such symptoms, you should go see your doctor ASAP
+                  <b>1. </b>Spots or dark strings floating in your vision
+                  <br />
+                  <b>2. </b>Blurred vision
+                  <br />
+                  <b>3. </b>Fluctuating vision
+                  <br />
+                  <b>4. </b>Dark or empty areas in your vision
+                  <br />
+                  <b>5. </b>Vision loss
+                  <br />
+                  <b>6. </b>If you notice any such symptoms, you should go see
+                  your doctor ASAP
                 </p>
-              </div></div>
+              </div>
+            </div>
           </div>
 
           <div className={styles.btncontianer}>
@@ -212,7 +251,6 @@ const ImageUpload = () => {
               Try with another image
             </button>
           </div>
-
         </div>
       )}
       <ChatBot />

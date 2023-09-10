@@ -18,6 +18,11 @@ const PrivateRoutes = () => {
 
     const accept = verifyToken(localStorage.getItem('Token'))
 
+    if(accept)
+    {
+        localStorage.setItem('ID' , accept)
+    }
+
     return (accept ? <Outlet /> : <Navigate to="/login" />)
 };
 
