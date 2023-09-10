@@ -9,8 +9,8 @@
 .box {
     width: 75vw;
     height: 35vh;
-    background-color: #907bc2;
-    border-radius: 2%/10%;
+    /* background-color: #907bc2; */
+    border-radius: 5vh;
     margin: 4vh 0;
     display: flex;
     justify-content: space-between;
@@ -44,6 +44,7 @@
 }
 
 .box {
+    height: fit-content;
 }
 
 .content {
@@ -63,3 +64,36 @@
 .box img {
     height: 25vh;
 }
+
+.dashtable{
+    width: 100%;
+    border: 1px solid white;
+    color: white;
+    /* border-collapse: collapse; */
+}
+
+th{
+    width: 30%;
+}
+
+th:nth-of-type(1){
+    width: 40%;
+}
+
+th, td{
+    text-align: center;
+    border: 1px solid white;
+}
+
+td:nth-of-type(1){
+    width: 35%;
+}
+
+.imgtable{
+    height: 100%;
+}
+
+thead{
+    height: 50px;
+}
+
