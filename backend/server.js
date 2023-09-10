@@ -250,6 +250,23 @@ app.post('/savehistory' , async(req , res) =>{
 
 })
 
+app.post('/getdata' , async(req,res) =>{
+
+    try {
+        
+        const values = [req.body.abhaid]
+
+        const query = 'SELECT * FROM HISTORY WHERE abha_id = $1 order by TO_DATE(date , \'DD-MM-YYYY\')'
+        const { rows } = await db.query(query, values);
+
+        res.json({success:true , data : rows})
+
+    } catch (error) {
+        return res.status(400).json({ error: error.message })
+    }
+   
+})
+
 const port = process.env.PORT || 5000
 
 app.listen(port, () => {
