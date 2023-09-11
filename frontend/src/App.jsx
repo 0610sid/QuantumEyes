@@ -17,9 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
-          <Route element={<PrivateRoutes />}>
+          {/* <Route element={<PrivateRoutes />}> */}
             <Route path="/image/upload" element={<ImageUpload />} />
-          </Route>
+          {/* </Route> */}
 
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
