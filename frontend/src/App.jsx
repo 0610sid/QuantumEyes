@@ -19,11 +19,11 @@ function App() {
 
           <Route element={<PrivateRoutes />}>
             <Route path="/image/upload" element={<ImageUpload />} />
+            <Route path="/dashboard" element={<Dashboard />}></Route>
           </Route>
 
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="*" element={<Error404 />} />
         </Routes>
       </Router>

@@ -235,6 +235,11 @@ app.post('/savehistory' , async(req , res) =>{
     try {
         
         const values = [req.body.url , req.body.abhaid , req.body.date , req.body.diag]
+        
+        if(!req.body.url)
+        {
+            throw Error("Kindly upload an image")
+        }
 
         db.query('INSERT INTO HISTORY(url, abha_id, date , diag) VALUES ($1, $2, $3, $4)', values, (error, results) => {
             if (error) {

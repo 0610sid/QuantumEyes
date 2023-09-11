@@ -7,9 +7,10 @@ import styles from "../stylesheets/ImageUp.module.css";
 import imguploadsvg from "../assets/imgupload.svg";
 
 import ChatBot from "./ChatBot.jsx";
+import { useNavigate } from "react-router-dom";
 
 const toclass = [1, 2, 0, 3, 4];
-const gradesAll = ["Mild", "Moderate", "No", "Proliferate", "Severe"];
+const gradesAll = ["Mild", "Moderate", "None", "Proliferate", "Severe"];
 const description = [
   "This is the earliest stage of diabetic retinopathy, characterized by tiny swellings/bulges in the blood vessels of the retina. These areas of swelling are known as microaneurysms. These microaneurysms can cause small amounts of fluid to leak into the retina, triggering swelling of the macula - the back of the retina. Despite this, there are usually no clear symptoms indicating there is a problem.",
   "At this stage, the tiny blood vessels further swell up, blocking blood flow to the retina and preventing proper nourishment. This stage will only cause noticeable signs if there is a build-up of blood and other fluids in the macula, causing vision to become blurry.",
@@ -28,6 +29,8 @@ const ImageUpload = () => {
 
   const [filename, setfilename] = useState(null);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate()
 
   const file = useRef(null);
 
@@ -102,31 +105,38 @@ const ImageUpload = () => {
       "/" +
       curdate.getFullYear();
 
+    const response1 = await fetch(
+      "https://api.cloudinary.com/v1_1/djb8pgo4n/image/upload",
+      {
+        method: "POST",
+        body: cloud,
+      }
+    );
 
-    const response1 = await fetch("https://api.cloudinary.com/v1_1/djb8pgo4n/image/upload", {
-      method: "POST",
-      body: cloud,
-    });
-
-    const data1 = await response1.json()
+    const data1 = await response1.json();
 
     const response2 = await fetch("http://localhost:5000/savehistory", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        url: data1.url, abhaid: localStorage.getItem('ID'), date: fordate, diag: "GRADE1",
+        url: data1.url,
+        abhaid: localStorage.getItem("ID"),
+        date: fordate,
+        diag: "GRADE1",
       }),
-    })
+    });
 
-    const data2 = await response2.json()
+    const data2 = await response2.json();
 
     if (data2.success) {
-      setloader(false)
-      setresult(true)
+      setloader(false);
+      setresult(true);
     }
-
-
   };
+
+  const showdash = () => {
+    navigate("/dashboard")
+  }
 
   const tryagain = () => {
     setclickme(true);
@@ -195,22 +205,49 @@ const ImageUpload = () => {
               className={styles.loader}
             />
 
-            <p className={styles.loadtext}>Hang Tight! While We Analyze Your Image</p>
+            <p className={styles.loadtext}>
+              Hang Tight! While We Analyze Your Image
+            </p>
           </div>
         </div>
       )}
 
       {result && (
         <div className={styles.thirdouter}>
+
+          <div className={styles.btncontianer}>
+            <button className={styles.buttons} onClick={tryagain}>New Image</button>
+            <button className={styles.buttons} onClick={showdash}>History</button>
+          </div>
+
           <div className={styles.thirdout}>
-            <div className={styles.thirdin}>
+            <div className={styles.thirdin2}>
               <p className={styles.thirdhead}>Diagnosis</p>
 
-              <div className={styles.thirdtext}>
-                According to our analysis, the Image you uploaded is of{" "}
-                <b>Grade {toclass[grade]}</b> severity. This Falls under the
-                category of <b>{gradesAll[grade]} Diabetic Retinopathy</b>.
+              <div className={styles.thirdscroll}>
+                <div className={styles.thirdtxt}>
+                  <div className={styles.thirdintxt1}>Severity</div>
+                  <div>:</div>
+                  <div className={styles.thirdintxt2}>Moderate</div>
+                </div>
+
+                <div className={styles.thirdtxt}>
+                  <div className={styles.thirdintxt1}>Description</div>
+                  <div>:</div>
+                  <div className={styles.thirdintxt2}>At this stage, the tiny blood vessels further swell up, blocking blood flow to the retina and preventing proper nourishment. This stage will only cause noticeable signs if there is a build-up of blood and other fluids in the macula, causing vision to become blurry.</div>
+                </div>
+
+                <div className={styles.thirdtxt}>
+                  <div className={styles.thirdintxt1}>Precaution</div>
+                  <div>:</div>
+                  <div className={styles.thirdintxt2}>At this stage, the tiny blood vessels further swell up, blocking blood flow to the retina and preventing proper nourishment. This stage will only cause noticeable signs if there is a build-up of blood and other fluids in the macula, causing vision to become blurry.
+                  At this stage, the tiny blood vessels further swell up, blocking blood flow to the retina and preventing proper nourishment. This stage will only cause noticeable signs if there is a build-up of blood and other fluids in the macula, causing vision to become blurry.</div>
+                </div>
               </div>
+            </div>
+
+            <div className={styles.thirdin}>
+              <p className={styles.thirdhead}>Image</p>
               <img
                 src={file.current && URL.createObjectURL(file.current)}
                 alt="Uploaded"
@@ -218,38 +255,6 @@ const ImageUpload = () => {
               />
             </div>
 
-            <div className={styles.thirdin}>
-              <p className={styles.thirdhead}>Description</p>
-
-              <div className={styles.thirdtext}>{description[grade]}</div>
-            </div>
-
-            <div className={styles.thirdin}>
-              <p className={styles.thirdhead}>Symptoms</p>
-
-              <div className={styles.thirdtext}>
-                <p className={styles.symptomsdiv}>
-                  <b>1. </b>Spots or dark strings floating in your vision
-                  <br />
-                  <b>2. </b>Blurred vision
-                  <br />
-                  <b>3. </b>Fluctuating vision
-                  <br />
-                  <b>4. </b>Dark or empty areas in your vision
-                  <br />
-                  <b>5. </b>Vision loss
-                  <br />
-                  <b>6. </b>If you notice any such symptoms, you should go see
-                  your doctor ASAP
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.btncontianer}>
-            <button className={styles.buttons} onClick={tryagain}>
-              Try with another image
-            </button>
           </div>
         </div>
       )}
