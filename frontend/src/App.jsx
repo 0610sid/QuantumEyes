@@ -16,14 +16,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-
-          {/* <Route element={<PrivateRoutes />}> */}
+          <Route element={<PrivateRoutes />}>
             <Route path="/image/upload" element={<ImageUpload />} />
-          {/* </Route> */}
-
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="*" element={<Error404 />} />
         </Routes>
       </Router>
