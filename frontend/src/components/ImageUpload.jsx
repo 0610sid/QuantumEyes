@@ -30,7 +30,17 @@ const ImageUpload = () => {
   const [filename, setfilename] = useState(null);
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("ID");
+    localStorage.removeItem("Token");
+    navigate("/");
+  };
+
+  const gohome = () => {
+    navigate("/");
+  };
 
   const file = useRef(null);
 
@@ -135,8 +145,8 @@ const ImageUpload = () => {
   };
 
   const showdash = () => {
-    navigate("/dashboard")
-  }
+    navigate("/dashboard");
+  };
 
   const tryagain = () => {
     setclickme(true);
@@ -147,6 +157,22 @@ const ImageUpload = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.buttonab}>
+        <button className={styles.buttons} onClick={gohome}>
+          Home
+        </button>
+        
+        {result && (
+          <button className={styles.buttons} onClick={tryagain}>
+            New Image
+          </button>
+        )}
+
+        <button className={styles.buttons} onClick={logout}>
+          Logout
+        </button>
+      </div>
+
       {clickme && (
         <div className={styles.firstout}>
           <div className={styles.firstin} id="outerdiv">
@@ -214,12 +240,6 @@ const ImageUpload = () => {
 
       {result && (
         <div className={styles.thirdouter}>
-
-          <div className={styles.btncontianer}>
-            <button className={styles.buttons} onClick={tryagain}>New Image</button>
-            <button className={styles.buttons} onClick={showdash}>History</button>
-          </div>
-
           <div className={styles.thirdout}>
             <div className={styles.thirdin2}>
               <p className={styles.thirdhead}>Diagnosis</p>
@@ -234,14 +254,30 @@ const ImageUpload = () => {
                 <div className={styles.thirdtxt}>
                   <div className={styles.thirdintxt1}>Description</div>
                   <div>:</div>
-                  <div className={styles.thirdintxt2}>At this stage, the tiny blood vessels further swell up, blocking blood flow to the retina and preventing proper nourishment. This stage will only cause noticeable signs if there is a build-up of blood and other fluids in the macula, causing vision to become blurry.</div>
+                  <div className={styles.thirdintxt2}>
+                    At this stage, the tiny blood vessels further swell up,
+                    blocking blood flow to the retina and preventing proper
+                    nourishment. This stage will only cause noticeable signs if
+                    there is a build-up of blood and other fluids in the macula,
+                    causing vision to become blurry.
+                  </div>
                 </div>
 
                 <div className={styles.thirdtxt}>
                   <div className={styles.thirdintxt1}>Precaution</div>
                   <div>:</div>
-                  <div className={styles.thirdintxt2}>At this stage, the tiny blood vessels further swell up, blocking blood flow to the retina and preventing proper nourishment. This stage will only cause noticeable signs if there is a build-up of blood and other fluids in the macula, causing vision to become blurry.
-                  At this stage, the tiny blood vessels further swell up, blocking blood flow to the retina and preventing proper nourishment. This stage will only cause noticeable signs if there is a build-up of blood and other fluids in the macula, causing vision to become blurry.</div>
+                  <div className={styles.thirdintxt2}>
+                    At this stage, the tiny blood vessels further swell up,
+                    blocking blood flow to the retina and preventing proper
+                    nourishment. This stage will only cause noticeable signs if
+                    there is a build-up of blood and other fluids in the macula,
+                    causing vision to become blurry. At this stage, the tiny
+                    blood vessels further swell up, blocking blood flow to the
+                    retina and preventing proper nourishment. This stage will
+                    only cause noticeable signs if there is a build-up of blood
+                    and other fluids in the macula, causing vision to become
+                    blurry.
+                  </div>
                 </div>
               </div>
             </div>
@@ -254,7 +290,6 @@ const ImageUpload = () => {
                 className={styles.uploadedimg}
               />
             </div>
-
           </div>
         </div>
       )}

@@ -16,6 +16,12 @@ const Dashboard = () => {
         navigate('/image/upload');
     }
 
+    const logout = () => {
+        localStorage.removeItem('ID')
+        localStorage.removeItem('Token')
+        navigate("/")
+    }
+
     const [alldata, setAllData] = useState([]);
     let once = true;
 
@@ -41,7 +47,7 @@ const Dashboard = () => {
                     <button className={styles.buttons} onClick={upload}>
                         Upload
                     </button>
-                    <button className={styles.buttons} onClick={upload}>
+                    <button className={styles.buttons} onClick={logout}>
                         Logout
                     </button>
                 </div>

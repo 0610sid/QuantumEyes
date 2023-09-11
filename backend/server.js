@@ -42,7 +42,7 @@ app.post('/signup', async (req, res) => {
         }
 
         if (req.body.abhaid <= 10000000000000 || req.body.abhaid >= 99999999999999) {
-            throw new Error('Enter a valid Abha Id');
+            throw new Error('Abha ID should be of 14 digits');
         }
 
         const query = 'SELECT * FROM USERS WHERE abha_id = $1';
@@ -134,7 +134,7 @@ app.post('/signup2', async (req, res) => {
         }
 
         if (!validator.isStrongPassword(req.body.password, { minLength: 8, minUppercase: 0, minSymbols: 0 })) {
-            throw new Error('Password not strong enough')
+            throw new Error('Password must be of minimum 8 characters')
         }
 
         const salt = await bcrypt.genSalt(12)
@@ -197,7 +197,7 @@ app.post('/login', async (req, res) => {
         }
 
         if (req.body.abhaid <= 10000000000000 || req.body.abhaid >= 99999999999999) {
-            throw Error('Enter a valid Abha Id')
+            throw Error('Abha ID should be of 14 digits')
         }
 
         const values = [req.body.abhaid]

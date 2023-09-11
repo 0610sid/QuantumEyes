@@ -1,16 +1,16 @@
 .icon {
     background-color: black;
     border-radius: 100%;
-    /* width: 4vw;
-    height: 4vw; */
+    width: 4.5vw;
+    height: 4.5vw;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.5vw;
     position: fixed;
-    bottom: 3%;
-    right: 2%;
+    bottom: 5%;
+    right: 3.5%;
     z-index: 999;
     transition: ease 0.3s, box-shadow 0.3s ease;
 }

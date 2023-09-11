@@ -43,7 +43,7 @@ const Login = () => {
         if (json.success) {
             setloader(false)
             localStorage.setItem("Token", json.authToken)
-            navigate("/image/upload")
+            navigate("/dashboard")
         }
 
         if (json.error) {
