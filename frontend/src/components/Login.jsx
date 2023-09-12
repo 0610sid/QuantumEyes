@@ -26,7 +26,7 @@ const Login = () => {
     }
 
     const handlesubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         setloader(true)
 

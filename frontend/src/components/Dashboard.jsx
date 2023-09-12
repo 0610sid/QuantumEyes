@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import styles from "../stylesheets/Dashboard.module.css";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect } from "react"
+import styles from "../stylesheets/Dashboard.module.css"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 const condition = ['Mild', 'Moderate', 'No DR', 'Proliferative DR', 'Severe']
 
 const Dashboard = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const gohome = () => {
-        navigate("/");
+        navigate("/")
     }
 
     const upload = () => {
-        navigate('/image/upload');
+        navigate('/image/upload')
     }
 
     const logout = () => {
@@ -22,8 +22,8 @@ const Dashboard = () => {
         navigate("/")
     }
 
-    const [alldata, setAllData] = useState([]);
-    let once = true;
+    const [alldata, setAllData] = useState([])
+    let once = true
 
     useEffect(() => {
         const getdata = async () => {
@@ -89,7 +89,7 @@ const Dashboard = () => {
                 </section>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default Dashboard;
+export default Dashboard

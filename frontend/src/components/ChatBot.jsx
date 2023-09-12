@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
-import bot from "../assets/bot.png";
-import close from "../assets/close2.png";
-import styles from "../stylesheets/chatbot.module.css";
+import bot from "../assets/bot.png"
+import close from "../assets/close2.png"
+import styles from "../stylesheets/chatbot.module.css"
 
 const ChatBot = () => {
-    const [show, setshow] = useState(false);
+    const [show, setshow] = useState(false)
 
     const activate = () => {
-        setshow(!show);
-    };
+        setshow(!show)
+    }
 
     return (
         <div>
@@ -26,7 +26,7 @@ const ChatBot = () => {
                     </div>
                     <div className={styles.chatcont}>
                         <iframe
-                            allow="microphone;"
+                            allow="microphone"
                             src="https://console.dialogflow.com/api-client/demo/embedded/66986b33-d0f9-42ed-9529-ac19a0566e28"
                             style={{
                                 height: "70vh",
@@ -48,7 +48,7 @@ const ChatBot = () => {
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default ChatBot;
+export default ChatBot

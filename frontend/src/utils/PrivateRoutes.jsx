@@ -1,5 +1,5 @@
-import React from "react";
-import { Outlet, Navigate } from "react-router-dom";
+import React from "react"
+import { Outlet, Navigate } from "react-router-dom"
 
 import jwt_decode from 'jwt-decode'
 
@@ -24,6 +24,6 @@ const PrivateRoutes = () => {
     }
 
     return (accept ? <Outlet /> : <Navigate to="/login" />)
-};
+}
 
-export default PrivateRoutes;
+export default PrivateRoutes

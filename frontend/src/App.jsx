@@ -1,14 +1,14 @@
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
-import Home from "./components/Home";
-import ImageUpload from "./components/ImageUpload";
-import Error404 from "./components/Error404";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
-import Dashboard from "./components/Dashboard";
+import Home from "./components/Home"
+import ImageUpload from "./components/ImageUpload"
+import Error404 from "./components/Error404"
+import Login from "./components/Login"
+import SignUp from "./components/SignUp"
+import Dashboard from "./components/Dashboard"
 
-import PrivateRoutes from "./utils/PrivateRoutes";
+import PrivateRoutes from "./utils/PrivateRoutes"
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
         </Routes>
       </Router>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

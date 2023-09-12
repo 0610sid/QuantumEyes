@@ -134,7 +134,23 @@
     color: #a3b1eb;
 }
 
+.mobile{
+    display: none;
+}
+
+.desktop{
+    display: block;
+}
+
 @media (orientation: portrait) {
+    .mobile{
+        display: block;
+    }
+    
+    .desktop{
+        display: none;
+    }
+
     .container {
         background: url("blob_portrait.svg") no-repeat;
     }

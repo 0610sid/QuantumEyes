@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-import styles from "../stylesheets/404.module.css";
+import styles from "../stylesheets/404.module.css"
 
 const Error404 = () => {
   return (
@@ -10,7 +10,7 @@ const Error404 = () => {
         <div className={styles.text}>We're sorry , it looks like the page you're looking for isn't in our system. Head back <a href="/" className={styles.link}>home</a>!</div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Error404;
+export default Error404

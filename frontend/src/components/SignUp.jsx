@@ -1,128 +1,128 @@
-import React, { useState } from "react";
-import styles from "../stylesheets/Login.module.css";
+import React, { useState } from "react"
+import styles from "../stylesheets/Login.module.css"
 
-import user from "../assets/user.png";
-import password from "../assets/password.png";
-import email from "../assets/email.png";
-import otp from "../assets/otp.png";
+import user from "../assets/user.png"
+import password from "../assets/password.png"
+import email from "../assets/email.png"
+import otp from "../assets/otp.png"
 
-import { useNavigate } from "react-router-dom";
-import { SyncLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom"
+import { SyncLoader } from "react-spinners"
 
 const Signup = () => {
-  const [abha, setabha] = useState(0);
-  const [pass, setpass] = useState("");
-  const [emailid, setemail] = useState("");
-  const [otpin, setotp] = useState("");
+  const [abha, setabha] = useState(0)
+  const [pass, setpass] = useState("")
+  const [emailid, setemail] = useState("")
+  const [otpin, setotp] = useState("")
 
-  const [error, seterror] = useState(null);
-  const [loader, setloader] = useState(false);
+  const [error, seterror] = useState(null)
+  const [loader, setloader] = useState(false)
 
-  const [part1, setpart1] = useState(true);
-  const [part2, setpart2] = useState(false);
-  const [part3, setpart3] = useState(false);
+  const [part1, setpart1] = useState(true)
+  const [part2, setpart2] = useState(false)
+  const [part3, setpart3] = useState(false)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const onchange1 = (event) => {
-    setabha(event.target.value);
-  };
+    setabha(event.target.value)
+  }
 
   const onchange2 = (event) => {
-    setpass(event.target.value);
-  };
+    setpass(event.target.value)
+  }
 
   const onchange3 = (event) => {
-    setemail(event.target.value);
-  };
+    setemail(event.target.value)
+  }
 
   const onchange4 = (event) => {
-    setotp(event.target.value);
-  };
+    setotp(event.target.value)
+  }
 
   const handlesubmit1 = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    setloader(true);
+    setloader(true)
 
     const response = await fetch("http://localhost:5000/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ abhaid: abha, email: emailid }),
-    });
+    })
 
-    const json = await response.json();
+    const json = await response.json()
 
     if (json.success) {
-      setloader(false);
-      setpart1(false);
-      setpart2(true);
+      setloader(false)
+      setpart1(false)
+      setpart2(true)
     }
 
     if (json.error) {
-      setloader(false);
-      seterror(json.error);
+      setloader(false)
+      seterror(json.error)
       setTimeout(() => {
-        seterror(null);
-      }, 4000);
+        seterror(null)
+      }, 4000)
     }
-  };
+  }
 
   const handlesubmit2 = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    setloader(true);
+    setloader(true)
 
     const response = await fetch("http://localhost:5000/verifyotp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ abhaid: abha, otp: otpin }),
-    });
+    })
 
-    const json = await response.json();
+    const json = await response.json()
 
     if (json.success) {
-      setloader(false);
-      setpart2(false);
-      setpart3(true);
+      setloader(false)
+      setpart2(false)
+      setpart3(true)
     }
 
     if (json.error) {
-      setloader(false);
-      seterror(json.error);
+      setloader(false)
+      seterror(json.error)
       setTimeout(() => {
-        seterror(null);
-      }, 4000);
+        seterror(null)
+      }, 4000)
     }
-  };
+  }
 
   const handlesubmit3 = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    setloader(true);
+    setloader(true)
 
     const response = await fetch("http://localhost:5000/signup2", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ abhaid: abha, password: pass }),
-    });
+    })
 
-    const json = await response.json();
+    const json = await response.json()
 
     if (json.success) {
-      setloader(false);
-      localStorage.setItem("Token", json.authToken);
-      navigate("/image/upload");
+      setloader(false)
+      localStorage.setItem("Token", json.authToken)
+      navigate("/image/upload")
     }
 
     if (json.error) {
-      setloader(false);
-      seterror(json.error);
+      setloader(false)
+      seterror(json.error)
       setTimeout(() => {
-        seterror(null);
-      }, 4000);
+        seterror(null)
+      }, 4000)
     }
-  };
+  }
 
   return (
     <div className={styles.outer}>
@@ -260,7 +260,7 @@ const Signup = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup

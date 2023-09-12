@@ -29,7 +29,7 @@
     transition: ease 0.3s, box-shadow 0.3s ease;
 }
 
-.welcomeabha{
+.welcomeabha {
     margin-top: 12vh;
     font-size: 4vh;
     color: white;
@@ -100,7 +100,6 @@ thead {
     font-size: 3vh;
 }
 
-th,
 td:nth-of-type(2) {
     width: 40%;
 }
@@ -109,22 +108,19 @@ tbody>tr {
     height: 200px;
 }
 
-th,
 td:nth-of-type(1) {
-    width: 4%;
+    width: 10%;
 }
 
-th,
 td:nth-of-type(3) {
     width: 23%
 }
 
-th,
 td:nth-of-type(4) {
     width: 23%
 }
 
-thead th{
+thead th {
     position: sticky;
     top: 0;
     left: 0;
@@ -159,32 +155,58 @@ tbody>tr:nth-of-type(odd) {
 } */
 
 @media (orientation: portrait) {
-
-    .buttonsflex{
-        gap:2vh;
+    .table{
+        font-size: 1.25vh;
     }
 
-    .buttons{
+    .buttonsflex {
+        gap: 2vh;
+    }
+
+    .buttons {
         width: 35%;
         margin: 3vh 0 3vh 0vh;
         padding: 1.75% 1.5%;
         font-size: 3vw;
     }
 
-    .welcomeabha{
+    .welcomeabha {
         font-size: 2vh;
     }
 
-    .box{
+    .box {
         width: 95%;
     }
 
-    .tablecontent{
+    .tablecontent {
         padding: 3vh 2vh;
     }
 
-    thead{
+    thead {
         font-size: 1.5vh;
     }
 
-}   
+    td:nth-of-type(1) {
+        width: 13%;
+    }
+
+    td:nth-of-type(2) {
+        width: 20%
+    }
+
+    td:nth-of-type(3) {
+        width: 20%
+    }
+
+    td:nth-of-type(4) {
+        width: 20%
+    }
+
+    tbody>tr {
+        height: 28vw;
+    }
+
+    .box img{
+        height: 15vw;
+    }
+}

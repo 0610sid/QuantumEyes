@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== "production") {
-    require('dotenv').config();
+    require('dotenv').config()
 }
 
 const { Client } = require('pg')
@@ -14,10 +14,10 @@ const client = new Client({
 
 client.connect((err) => {
     if (err) {
-        console.log(err);
-        return;
+        console.log(err)
+        return
     }
-    console.log("Connected");
+    console.log("Connected")
 })
 
 module.exports = {
