@@ -28,7 +28,7 @@ const Dashboard = () => {
     useEffect(() => {
         const getdata = async () => {
             const id = localStorage.getItem("ID")
-            const response = await axios.post("http://localhost:5000/getdata", { abhaid: id })
+            const response = await axios.post("http:// 52.66.197.159:5000/getdata", { abhaid: id })
             setAllData(response.data.data)
             console.log(alldata)
         }
