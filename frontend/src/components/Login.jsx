@@ -30,7 +30,7 @@ const Login = () => {
 
         setloader(true)
 
-        const response = await fetch("http:// 52.66.197.159:5000/login",
+        const response = await fetch("http://52.66.197.159:5000/login",
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

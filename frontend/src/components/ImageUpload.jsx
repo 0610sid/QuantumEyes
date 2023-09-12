@@ -148,7 +148,7 @@ const ImageUpload = () => {
 
       const data1 = await response1.json()
 
-      const response2 = await fetch("http:// 52.66.197.159:5000/savehistory", {
+      const response2 = await fetch("http://52.66.197.159:5000/savehistory", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

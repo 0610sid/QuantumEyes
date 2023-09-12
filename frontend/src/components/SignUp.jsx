@@ -45,7 +45,7 @@ const Signup = () => {
 
     setloader(true)
 
-    const response = await fetch("http:// 52.66.197.159:5000/signup", {
+    const response = await fetch("http://52.66.197.159:5000/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ abhaid: abha, email: emailid }),
@@ -73,7 +73,7 @@ const Signup = () => {
 
     setloader(true)
 
-    const response = await fetch("http:// 52.66.197.159:5000/verifyotp", {
+    const response = await fetch("http://52.66.197.159:5000/verifyotp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ abhaid: abha, otp: otpin }),
@@ -101,7 +101,7 @@ const Signup = () => {
 
     setloader(true)
 
-    const response = await fetch("http:// 52.66.197.159:5000/signup2", {
+    const response = await fetch("http://52.66.197.159:5000/signup2", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ abhaid: abha, password: pass }),
