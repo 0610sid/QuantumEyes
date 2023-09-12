@@ -2,7 +2,6 @@ import torch
 from PIL import Image
 from flask import Flask, request, jsonify
 import io
-from flask_cors import CORS
 import qiskit
 import torch
 import torch.nn as nn
@@ -33,6 +32,8 @@ class QuantumCircuit:
         self.theta_3 = qiskit.circuit.Parameter('theta3')
         self.theta_4 = qiskit.circuit.Parameter('theta4')
         self.theta_5 = qiskit.circuit.Parameter('theta5')
+        self.theta_6 = qiskit.circuit.Parameter('theta6')
+        self.theta_7 = qiskit.circuit.Parameter('theta7')
 
         # Shove in the Hardav gate, a barrier (visual), and a rotation about the y plane of theta degrees
         self._circuit.h(all_qubits)
@@ -45,8 +46,12 @@ class QuantumCircuit:
         self._circuit.ry(self.theta_2, 1)
         self._circuit.ry(self.theta_3, 2)
         self._circuit.cz(0, 2)
-        self._circuit.ry(self.theta_4, 2)
-        self._circuit.ry(self.theta_5, 0)
+        self._circuit.ry(self.theta_4, 0)
+        self._circuit.cz(0,2)
+        self._circuit.ry(self.theta_5, 1)
+        self._circuit.ry(self.theta_6, 2)
+        self._circuit.ry(self.theta_7, 0)
+
         self._circuit.measure_all()
 
         # save these varaibles for later so we don't have to call them again during the forwarding
@@ -64,12 +69,14 @@ class QuantumCircuit:
                                                self.theta_2: thetas[2],
                                                self.theta_3: thetas[3],
                                                self.theta_4: thetas[4],
-                                               self.theta_5: thetas[5]}])
+                                               self.theta_5: thetas[5],
+                                               self.theta_6: thetas[6],
+                                               self.theta_7: thetas[7]}])
 
         # execution
         counts = job.result().get_counts()
         expects = np.zeros(8)
-        for k in range(6):
+        for k in range(8):
             key = QC_outputs[k]
             perc = counts.get(key, 0) / self.shots
             expects[k] = perc
@@ -114,7 +121,7 @@ class HybridFunction(Function):
         input_list = list(input)[0]
         # print(input_list)
 
-        input_list = input_list.cuda()
+        # input_list = input_list.cuda()
 
         # A list of all the gradients
         gradients = torch.Tensor()
@@ -153,7 +160,7 @@ class HybridFunction(Function):
 
         # Find the gradients at last!!!
         h = result * Fixer
-        h = h.cuda()
+        # h = h.cuda()
         # then return it for backprop
         return h, None, None
 
@@ -217,7 +224,7 @@ class ConvNet(nn.Module):
 
         theta = x
         x = self.quantum(x)
-        x = x.type(dtype=torch.cuda.FloatTensor)
+        x = x.type(dtype=torch.FloatTensor)
 
         output = self.output_layer(x.float())
         x = output.view(1, -1)

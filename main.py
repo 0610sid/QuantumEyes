@@ -1,12 +1,13 @@
 import torch
-from PIL import Image
+from PIL import Image, ImageOps
 from flask import Flask, request, jsonify
 import io
-from flask_cors import CORS
 import qiskit
 import torch
 import torch.nn as nn
 import numpy as np
+from keras.models import load_model 
+import flask_cors as cors
 
 import torch
 from torch.autograd import Function
@@ -23,17 +24,15 @@ setattr(__main__, "Hybrid", Hybrid)
 setattr(__main__, "HybridFunction", HybridFunction)
 setattr(__main__, "QuantumCircuit", QuantumCircuit)
 
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-else:
-    device = torch.device("cpu")
+device = torch.device("cpu")
 
 QC_outputs = ['000', '001', '010', '011', '100', '101', '110', '111']
 
-model = torch.load('qcnnmodel_73perc.pt', map_location = torch.device('cpu'))
+model = ConvNet()
+model = torch.load('model85perc.pt', map_location = 'cpu')
+verify_model = load_model('keras_model.h5')
 
 def transform_image(image):
-    # Calculate the cropping box to make the image square
     preprocess = transforms.Compose([
         transforms.Resize(224),
         transforms.CenterCrop(224),
@@ -48,17 +47,23 @@ def transform_image(image):
 
 def predict(input):
     model.eval()
-    prediction, theta = model(input.to('cuda'))
+    prediction, theta = model(input.to(device))
 
     _, predicted = torch.max(prediction.data, 1)
     return predicted.item()
 
+def verifyinput(input):
+    output = verify_model.predict(input)[0]
+    if output[0] > 0.5:
+        return 0
+    else:
+        return 1
+    
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173"])
+cors.CORS(app)
 
-
-@app.route('/predict', methods=['GET', 'POST'])
+@app.route('/predict', methods=['POST'])
 def index():
     if request.method == "POST":
         file = request.files['file']
@@ -73,8 +78,32 @@ def index():
         except Exception as e:
             return jsonify({'error': str(e)})
 
-    return "OK"
+
+@app.route('/verify', methods=['POST'])
+def verify():
+    if request.method == "POST":
+        file = request.files['file']
+        if file is None or file.filename == "":
+            return jsonify({'error': 'No file Uploaded'})
+
+        try:
+            image_bytes = file.read()
+            pillow_image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+            data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+            size = (224, 224)
+            convimage = ImageOps.fit(pillow_image, size, Image.Resampling.LANCZOS)
+
+            image_array = np.asarray(convimage)
+
+            normalized_image_array = (image_array.astype(np.float32) / 127.5) - 1
+
+            data[0] = normalized_image_array
+
+            return jsonify({'class_id': verifyinput(data)})
+
+        except Exception as e:
+            return jsonify({'error': str(e)})
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0' , port=8000)
+    app.run(debug=False)

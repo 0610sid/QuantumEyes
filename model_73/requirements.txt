@@ -1,9 +1,0 @@
-flask
-torch
-flask_cors
-qiskit
-numpy
-torchvision
-pillow
-gunicorn
-qiskit-aer
