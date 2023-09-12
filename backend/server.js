@@ -261,7 +261,7 @@ app.post('/getdata' , async(req,res) =>{
         
         const values = [req.body.abhaid]
 
-        const query = 'SELECT * FROM HISTORY WHERE abha_id = $1 order by TO_DATE(date , \'DD-MM-YYYY\')'
+        const query = 'SELECT * FROM HISTORY WHERE abha_id = $1 order by TO_DATE(date , \'DD-MM-YYYY\') desc'
         const { rows } = await db.query(query, values);
 
         res.json({success:true , data : rows})

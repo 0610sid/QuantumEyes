@@ -212,7 +212,7 @@ const ImageUpload = () => {
             {filename && (
               <div className={styles.fileinfo} id="acceptdiv">
                 <span>{filename} </span>
-                <button className={styles.buttons} onClick={handlesubmit}>
+                <button className={styles.buttons2} onClick={handlesubmit}>
                   Submit
                 </button>
               </div>

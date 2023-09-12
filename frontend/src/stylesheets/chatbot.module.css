@@ -56,3 +56,12 @@
     transform: translateY(-2px);
     cursor: pointer;
 }
+
+@media (orientation: portrait)
+{
+    .icon{
+        width: 12vw !important;
+        height: 12vw !important;
+        right : 5% !important;
+    }
+}

@@ -57,9 +57,7 @@ const Dashboard = () => {
 
 
                         <div className={styles.box}>
-                            {/* <div className={styles.tableheading}>
-                                Previous Uploads
-                            </div> */}
+                        
                             <div className={styles.tablecontent}>
                                 <div className={styles.tableouter}>
                                     <table className={styles.table}>
