@@ -32,6 +32,8 @@ const ImageUpload = () => {
   const [loader, setloader] = useState(false)
   const [result, setresult] = useState(false)
   const [grade, setGrade] = useState(null)
+  var gradevar = null
+
   let valid = false
 
   const [filename, setfilename] = useState(null)
@@ -117,54 +119,52 @@ const ImageUpload = () => {
       })
 
     if (valid) {
-
-      await axios.post("https://modeldeploy-heesw62qmq-el.a.run.app/predict", form)
+      const res = await axios.post("https://modeldeploy-heesw62qmq-el.a.run.app/predict", form)
         .then((res) => {
-          setGrade(res.data.class_id)
+          gradevar = res.data.class_id
+          setGrade(gradevar)
         })
+        .then(async () => {
+          const cloud = new FormData()
+          cloud.append("file", file.current)
+          cloud.append("upload_preset", "quantumeyes")
+          cloud.append("cloud_name", "djb8pgo4n")
 
+          const curdate = new Date()
+          const fordate =
+            curdate.getDate() +
+            "/" +
+            (curdate.getMonth() + 1) +
+            "/" +
+            curdate.getFullYear()
 
-      const cloud = new FormData()
-      cloud.append("file", file.current)
-      cloud.append("upload_preset", "quantumeyes")
-      cloud.append("cloud_name", "djb8pgo4n")
+          const response1 = await fetch(
+            "https://api.cloudinary.com/v1_1/djb8pgo4n/image/upload",
+            {
+              method: "POST",
+              body: cloud,
+            }
+          )
 
-      const curdate = new Date()
-      const fordate =
-        curdate.getDate() +
-        "/" +
-        (curdate.getMonth() + 1) +
-        "/" +
-        curdate.getFullYear()
+          const data1 = await response1.json()
 
-      const response1 = await fetch(
-        "https://api.cloudinary.com/v1_1/djb8pgo4n/image/upload",
-        {
-          method: "POST",
-          body: cloud,
-        }
-      )
+          const response2 = await fetch("http://52.66.197.159:5000/savehistory", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              url: data1.url,
+              abhaid: localStorage.getItem("ID"),
+              date: fordate,
+              diag: gradevar,
+            }),
+          })
 
-
-      const data1 = await response1.json()
-
-      const response2 = await fetch("http://52.66.197.159:5000/savehistory", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          url: data1.url,
-          abhaid: localStorage.getItem("ID"),
-          date: fordate,
-          diag: grade,
-        }),
-      })
-
-      const data2 = await response2.json()
-
-      if (data2.success) {
-        setloader(false)
-        setresult(true)
-      }
+          const data2 = await response2.json()
+          if (data2.success) {
+            setloader(false)
+            setresult(true)
+          }
+        })
     }
   }
 
