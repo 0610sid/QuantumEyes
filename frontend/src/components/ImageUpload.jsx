@@ -155,7 +155,7 @@ const ImageUpload = () => {
           url: data1.url,
           abhaid: localStorage.getItem("ID"),
           date: fordate,
-          diag: "GRADE1",
+          diag: grade,
         }),
       })
 

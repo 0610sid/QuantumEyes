@@ -22,6 +22,9 @@ const createToken = (id) => {
     })
 }
 
+const logger = require('morgan')
+const fs = require('fs')
+
 const mailjet = new Mailjet.apiConnect(process.env.MJ_PUBLIC, process.env.MJ_SECRET)
 
 const app = express()
@@ -30,6 +33,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
+app.use(logger('common' , {
+    stream: fs.createWriteStream('./Access.logs' , {flags: 'a'})
+}))
+app.use(logger('dev'))
 
 app.post('/signup', async (req, res) => {
     try {
@@ -75,7 +82,12 @@ app.post('/signup', async (req, res) => {
                                 Subject: "Welcome to QuantumEyes",
                                 HTMLPart: `
                                 <body>
-                                <p> Your otp is ${genotp} </p>
+                                <center style="background-color: #0f0820; padding-top: 120px; font-family: Roboto, sans-serif; height: 250px">
+                                <font color="#ffffff">
+                                <h1> Thank you for Signing Up! </h1>
+                                <h2>Your OTP is <font color="#a3b1eb">${genotp}</font></h2>
+                                </font>
+                                </center>
                                 </body>
                                 `,
                                 TextPart: `Your otp is : ${genotp}`
@@ -109,7 +121,12 @@ app.post('/signup', async (req, res) => {
                             Subject: "Welcome to QuantumEyes",
                             HTMLPart: `
                             <body>
-                            <p> Your otp is ${genotp} </p>
+                            <center style="background-color: #0f0820; padding-top: 120px; font-family: Roboto, sans-serif; height: 250px">
+                            <font color="#ffffff">
+                            <h1> Thank you for Signing Up! </h1>
+                            <h2>Your OTP is <font color="#a3b1eb">${genotp}</font></h2>
+                            </font>
+                            </center>
                             </body>
                             `,
                             TextPart: `Your otp is : ${genotp}`
@@ -230,14 +247,13 @@ app.post('/login', async (req, res) => {
     }
 })
 
-app.post('/savehistory' , async(req , res) =>{
+app.post('/savehistory', async (req, res) => {
 
     try {
-        
-        const values = [req.body.url , req.body.abhaid , req.body.date , req.body.diag]
-        
-        if(!req.body.url)
-        {
+
+        const values = [req.body.url, req.body.abhaid, req.body.date, req.body.diag]
+
+        if (!req.body.url) {
             throw Error("Kindly upload an image")
         }
 
@@ -255,21 +271,21 @@ app.post('/savehistory' , async(req , res) =>{
 
 })
 
-app.post('/getdata' , async(req,res) =>{
+app.post('/getdata', async (req, res) => {
 
     try {
-        
+
         const values = [req.body.abhaid]
 
         const query = 'SELECT * FROM HISTORY WHERE abha_id = $1 order by TO_DATE(date , \'DD-MM-YYYY\') desc'
         const { rows } = await db.query(query, values)
 
-        res.json({success:true , data : rows})
+        res.json({ success: true, data: rows })
 
     } catch (error) {
         return res.status(400).json({ error: error.message })
     }
-   
+
 })
 
 const port = process.env.PORT || 5000
@@ -277,12 +293,3 @@ const port = process.env.PORT || 5000
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
 })
-
-// app.post('/myverify' , async(req,res) =>{
-//     try {
-//         var decoded = jwt.verify(req.body.token , process.env.SECRET)
-//         return res.json({success : true})
-//     } catch (error) {
-//         return res.status(400).json({success : false})
-//     }
-// })

@@ -25,7 +25,6 @@
 
 .container2 {
   min-width: 23vw;
-  /* min-height: 40vh; */
   border-radius: 25px;
   background-color: #0f0820;
   border-radius: 10px;
@@ -99,7 +98,6 @@
 .tagline2 {
   text-align: center;
   font-size: 0.9rem;
-  /* margin-bottom: 2%; */
   margin-top: 8%;
   color: green;
 }

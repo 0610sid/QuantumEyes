@@ -30,13 +30,9 @@ const Dashboard = () => {
             const id = localStorage.getItem("ID")
             const response = await axios.post("http://52.66.197.159:5000/getdata", { abhaid: id })
             setAllData(response.data.data)
-            console.log(alldata)
         }
         getdata()
     }, [])
-
-    console.log(alldata)
-
 
     return (
         <>
@@ -54,10 +50,7 @@ const Dashboard = () => {
                 <section>
 
                     <center>
-
-
                         <div className={styles.box}>
-                        
                             <div className={styles.tablecontent}>
                                 <div className={styles.tableouter}>
                                     <table className={styles.table}>
@@ -75,7 +68,7 @@ const Dashboard = () => {
                                                     <tr key={index}>
                                                         <td>{index + 1}</td>
                                                         <td><img src={data.url}></img></td>
-                                                        <td>{condition[data.diag[5]]}</td>
+                                                        <td>{condition[data.diag]}</td>
                                                         <td>{data.date}</td>
                                                     </tr>
                                                 )
